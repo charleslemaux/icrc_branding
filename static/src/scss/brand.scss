@@ -18,6 +18,19 @@ $pk-rad:        0.75rem;   // our generous radius for Odoo-specific shells
 $pk-rad-sm:     0.5rem;
 $pk-rad-pill:   50rem;
 
+// ── Extended design tokens ───────────────────────────────────────────────
+$pk-bg:          #fafafa;                          // page / content background
+$pk-card-bg:     #ffffff;                          // card / sheet surface
+$pk-border:      #e5e7eb;                          // subtle border
+$pk-text:        #111827;                          // primary text
+$pk-text-muted:  #6b7280;                          // secondary / meta text
+$pk-shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.04);   // resting card shadow
+$pk-shadow:      0 1px 3px rgba(0, 0, 0, 0.06);   // slight elevation
+$pk-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08); // hover / lifted state
+$pk-transition:  0.15s ease;                       // standard motion
+$pk-light:       #f3eef8;                          // light violet tint (hovers)
+$pk-deep-dark:   #0a0118;                          // darker deep for pressed states
+
 
 // ═══════════════════════════════════════════════════════════════════════════
 //  1. TYPOGRAPHY
@@ -55,57 +68,297 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  2. FORM VIEW
+//  2. CONTENT AREAS — global page background
+// ═══════════════════════════════════════════════════════════════════════════
+
+.o_action_manager .o_content {
+  background-color: $pk-bg;
+}
+
+.o_form_sheet_bg {
+  background-color: $pk-bg;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  3. FORM VIEW
 // ═══════════════════════════════════════════════════════════════════════════
 
 .o_form_sheet {
+  background: $pk-card-bg;
+  border: 1px solid $pk-border;
   border-radius: $pk-rad;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: $pk-shadow;
 }
 
-// Stat buttons — pill-shaped for a modern feel
-.oe_button_box .o_stat_button {
+// Stat buttons — rounded, branded hover
+.oe_button_box .o_stat_button,
+.oe_button_box .oe_stat_button {
+  border-color: $pk-border;
   border-radius: $pk-rad;
-}
-
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  3. LIST VIEW
-// ═══════════════════════════════════════════════════════════════════════════
-
-.o_list_view {
-  border-radius: $pk-rad;
-  overflow: hidden;
-}
-
-// Column headers — heading font
-.o_list_view thead th {
-  font-family: $pk-heading;
-  font-weight: 600;
-}
-
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  4. KANBAN VIEW
-// ═══════════════════════════════════════════════════════════════════════════
-
-.o_kanban_group {
-  border-radius: $pk-rad;
-}
-
-.o_kanban_record {
-  border-radius: $pk-rad-sm;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: background $pk-transition;
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: $pk-light;
+  }
+
+  .o_stat_value, .o_stat_text {
+    color: $pk-text;
+  }
+
+  .o_stat_value {
+    font-weight: 700;
+    color: $pk-deep;
+  }
+}
+
+// Field labels — muted, compact
+.o_form_label,
+label.o_form_label {
+  color: $pk-text-muted;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+// Notebook tabs — branded active state
+.o_notebook {
+  .nav-tabs {
+    border-bottom-color: $pk-border;
+
+    .nav-link {
+      color: $pk-text-muted;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      border-radius: $pk-rad-sm $pk-rad-sm 0 0;
+      transition: color $pk-transition;
+
+      &:hover {
+        color: $pk-deep;
+        border-color: transparent transparent $pk-border;
+      }
+
+      &.active {
+        color: $pk-deep;
+        border-color: $pk-border $pk-border $pk-card-bg;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Progress bars — pill-shaped, branded colour
+.o_progressbar .progress {
+  border-radius: $pk-rad-pill;
+  height: 8px;
+  background: lighten($pk-border, 4%);
+
+  .progress-bar {
+    background: $pk-deep !important;
+    border-radius: $pk-rad-pill;
+  }
+}
+
+.o_progressbar .o_progressbar_value {
+  color: $pk-deep;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+// Chatter — slightly off-white to distinguish from sheet
+.o_FormRenderer_chatterContainer {
+  background: darken($pk-bg, 1%);
+
+  .o_chatter_topbar {
+    border-bottom-color: $pk-border;
   }
 }
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  5. BUTTONS — shape only (colours come from $o-brand-primary)
+//  4. LIST VIEW
+// ═══════════════════════════════════════════════════════════════════════════
+
+.o_list_view {
+  border-radius: $pk-rad;
+  overflow: hidden;
+
+  // Column headers — uppercase, muted, heading font
+  thead th {
+    font-family: $pk-heading;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $pk-text-muted;
+    border-bottom: 2px solid $pk-border;
+    background: transparent;
+  }
+
+  // Rows — smooth hover highlight
+  tbody tr {
+    transition: background $pk-transition;
+
+    &:hover {
+      background-color: $pk-light !important;
+    }
+
+    td {
+      font-size: 0.8125rem;
+      color: $pk-text;
+      border-color: lighten($pk-border, 3%);
+      vertical-align: middle;
+    }
+  }
+
+  // Stage / status badges — pill shape
+  .badge,
+  .o_field_badge .badge {
+    border-radius: $pk-rad-pill;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    padding: 0.25em 0.75em;
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  5. KANBAN VIEW
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Columns — subtle background, clean structure
+.o_kanban_group {
+  background: #f9fafb;
+  border-radius: $pk-rad;
+  padding: 6px;
+
+  // Column headers
+  .o_kanban_header {
+    .o_column_title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: $pk-text;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .o_kanban_config .dropdown-toggle,
+    .o_kanban_quick_add {
+      color: $pk-text-muted;
+
+      &:hover { color: $pk-deep; }
+    }
+  }
+}
+
+// Cards — white surface with border, hover lift
+.o_kanban_record {
+  background: $pk-card-bg;
+  border: 1px solid $pk-border;
+  border-radius: $pk-rad-sm;
+  box-shadow: $pk-shadow-sm;
+  margin-bottom: 6px;
+  transition: box-shadow $pk-transition, transform $pk-transition;
+
+  &:hover {
+    box-shadow: $pk-shadow-hover;
+    transform: translateY(-1px);
+  }
+
+  // Card title
+  .o_kanban_record_title,
+  .oe_kanban_details h4,
+  .oe_kanban_details strong {
+    color: $pk-text;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  // Card body / metadata
+  .o_kanban_record_body,
+  .oe_kanban_details > div,
+  .oe_kanban_details .o_text_overflow,
+  .oe_kanban_details span,
+  .oe_kanban_details div {
+    color: $pk-text-muted;
+    font-size: 0.8125rem;
+  }
+
+  // Stat counts / number badges
+  .oe_kanban_primary_right strong,
+  .o_kanban_primary_right strong,
+  .o_kanban_primary_bottom strong {
+    color: $pk-deep;
+    font-weight: 600;
+  }
+
+  .badge, .oe_kanban_text_red {
+    color: $pk-deep !important;
+  }
+
+  // Footer meta
+  .oe_kanban_bottom_left,
+  .oe_kanban_bottom_right {
+    font-size: 0.75rem;
+    color: $pk-text-muted;
+  }
+
+  // Configure / secondary buttons
+  .btn-secondary {
+    border-color: $pk-border;
+    border-radius: $pk-rad-sm;
+    font-size: 0.8125rem;
+    transition: all $pk-transition;
+
+    &:hover {
+      background: $pk-light;
+      border-color: $pk-deep;
+    }
+  }
+
+  // Priority stars — violet tint
+  .o_priority .o_priority_star {
+    color: darken($pk-light, 10%);
+
+    &.fa-star {
+      color: $pk-deep;
+    }
+  }
+
+  // Ribbons / badges — compact uppercase
+  .o_kanban_record_ribbon .badge {
+    border-radius: $pk-rad-sm;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  // Activity icons
+  .o_activity_color_default { color: $pk-text-muted; }
+  .o_activity_color_today   { color: $pk-deep; }
+}
+
+// Quick-create card
+.o_kanban_quick_create {
+  background: $pk-card-bg;
+  border: 1px solid $pk-border;
+  border-radius: $pk-rad;
+  box-shadow: $pk-shadow;
+  padding: 12px;
+
+  .o_kanban_add,
+  .btn-primary {
+    background: $pk-deep;
+    border-color: $pk-deep;
+    border-radius: $pk-rad-sm;
+
+    &:hover { background: $pk-deep-dark; }
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  6. BUTTONS — shape only (colours come from $o-brand-primary)
 // ═══════════════════════════════════════════════════════════════════════════
 
 .btn {
@@ -124,7 +377,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  6. BADGES & TAGS — pill shape
+//  7. BADGES & TAGS — pill shape
 // ═══════════════════════════════════════════════════════════════════════════
 
 .badge,
@@ -135,7 +388,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  7. SEARCH
+//  8. SEARCH
 // ═══════════════════════════════════════════════════════════════════════════
 
 .o_searchview {
@@ -154,7 +407,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  8. MODALS
+//  9. MODALS
 // ═══════════════════════════════════════════════════════════════════════════
 
 .modal-content {
@@ -164,7 +417,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  9. CARDS
+//  10. CARDS
 // ═══════════════════════════════════════════════════════════════════════════
 
 .card {
@@ -174,7 +427,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  10. NOTIFICATIONS
+//  11. NOTIFICATIONS
 // ═══════════════════════════════════════════════════════════════════════════
 
 .o_notification {
@@ -183,7 +436,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  11. SETTINGS
+//  12. SETTINGS
 // ═══════════════════════════════════════════════════════════════════════════
 
 .o_setting_box {
@@ -198,7 +451,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  12. COMMAND PALETTE
+//  13. COMMAND PALETTE
 // ═══════════════════════════════════════════════════════════════════════════
 
 .o_command_palette {
@@ -208,7 +461,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  13. NAV TABS — branded active underline
+//  14. NAV TABS — branded active underline
 // ═══════════════════════════════════════════════════════════════════════════
 
 .nav-tabs .nav-link {
@@ -218,7 +471,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  14. TABLE HEADERS
+//  15. TABLE HEADERS
 // ═══════════════════════════════════════════════════════════════════════════
 
 .table thead th {
@@ -228,7 +481,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  15. DROPDOWN MENUS — smoother feel
+//  16. DROPDOWN MENUS — smoother feel
 // ═══════════════════════════════════════════════════════════════════════════
 
 .dropdown-menu {
@@ -243,7 +496,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  16. HOME / APP MENU — branded feel
+//  17. HOME / APP MENU — branded feel
 // ═══════════════════════════════════════════════════════════════════════════
 
 .o_home_menu {
@@ -263,7 +516,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  17. SMOOTH TRANSITIONS — global interactive elements
+//  18. SMOOTH TRANSITIONS — global interactive elements
 // ═══════════════════════════════════════════════════════════════════════════
 
 .nav-link,
@@ -278,7 +531,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  18. SCROLLBARS — thinner, cleaner
+//  19. SCROLLBARS — thinner, cleaner
 // ═══════════════════════════════════════════════════════════════════════════
 
 ::-webkit-scrollbar          { width: 6px; height: 6px; }
@@ -287,7 +540,7 @@ label.o_form_label,
 
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  19. TEXT SELECTION
+//  20. TEXT SELECTION
 // ═══════════════════════════════════════════════════════════════════════════
 
 ::selection {
