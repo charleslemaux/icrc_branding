@@ -1,0 +1,26 @@
+// =============================================================================
+// ICRC Brand Variables — loaded BEFORE Odoo's primary_variables.scss
+//
+// Odoo's primary_variables uses !default, so our values win and cascade
+// through the full Odoo → Bootstrap SCSS pipeline. Buttons, links, navbar,
+// focus rings, badges, active states … all inherit automatically.
+// =============================================================================
+
+// ── Brand colours ─────────────────────────────────────────────────────────
+
+$o-brand-primary:     #120427;   // deep violet — THE brand colour
+$o-brand-secondary:   #4d1a8a;   // lighter violet for hover / secondary
+
+$o-enterprise-color:  #120427;   // enterprise navbar / chrome
+
+// ── Softer corners ────────────────────────────────────────────────────────
+
+$border-radius:       0.5rem;
+$border-radius-sm:    0.375rem;
+$border-radius-lg:    0.75rem;
+$border-radius-pill:  50rem;
+
+// ── Font ──────────────────────────────────────────────────────────────────
+
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, 'Segoe UI',
+                         Roboto, Helvetica, Arial, sans-serif;
