@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="icrc_google_fonts" name="ICRC Google Fonts" inherit_id="web.layout" priority="99">
+        <xpath expr="//head/meta[1]" position="before">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+        </xpath>
+    </template>
+</odoo>
