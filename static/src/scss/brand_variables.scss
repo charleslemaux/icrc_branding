@@ -7,11 +7,19 @@
 // =============================================================================
 
 // ── Brand colours ─────────────────────────────────────────────────────────
+// Base:        rgb(18, 4, 39) = #120427 — deep violet (used everywhere)
+// Secondary:   #2d1154 — slightly lighter violet
 
-$o-brand-primary:     #120427;   // deep violet — THE brand colour
-$o-brand-secondary:   #4d1a8a;   // lighter violet for hover / secondary
+$o-enterprise-color:        #120427;   // navbar / chrome
+$o-enterprise-action-color: #120427;   // links, active states, focus rings, checkboxes
+$o-brand-odoo:              #120427;   // Odoo brand reference
+$o-brand-primary:           #120427;   // primary buttons, badges
+$o-brand-secondary:         #2d1154;   // slightly lighter for secondary elements
+$o-brand-lightsecondary:    #f3eef8;   // light violet tint
 
-$o-enterprise-color:  #120427;   // enterprise navbar / chrome
+// ── Action / link aliases ────────────────────────────────────────────────
+$o-action:              #120427;
+$o-main-link-color:     #120427;
 
 // ── Softer corners ────────────────────────────────────────────────────────
 
