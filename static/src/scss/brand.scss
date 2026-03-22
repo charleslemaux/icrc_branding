@@ -29,7 +29,10 @@ $pk-shadow:      0 1px 3px rgba(0, 0, 0, 0.06);   // slight elevation
 $pk-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08); // hover / lifted state
 $pk-transition:  0.15s ease;                       // standard motion
 $pk-light:       #f3eef8;                          // light violet tint (hovers)
+$pk-light-dim:   #d9cde8;                          // darker violet tint (stars)
 $pk-deep-dark:   #0a0118;                          // darker deep for pressed states
+$pk-border-soft: #edeef1;                          // lighter border variant
+$pk-bg-dim:      #f7f7f7;                          // slightly darker background
 
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -150,7 +153,7 @@ label.o_form_label {
 .o_progressbar .progress {
   border-radius: $pk-rad-pill;
   height: 8px;
-  background: lighten($pk-border, 4%);
+  background: $pk-border-soft;
 
   .progress-bar {
     background: $pk-deep !important;
@@ -166,7 +169,7 @@ label.o_form_label {
 
 // Chatter — slightly off-white to distinguish from sheet
 .o_FormRenderer_chatterContainer {
-  background: darken($pk-bg, 1%);
+  background: $pk-bg-dim;
 
   .o_chatter_topbar {
     border-bottom-color: $pk-border;
@@ -205,7 +208,7 @@ label.o_form_label {
     td {
       font-size: 0.8125rem;
       color: $pk-text;
-      border-color: lighten($pk-border, 3%);
+      border-color: $pk-border-soft;
       vertical-align: middle;
     }
   }
@@ -317,7 +320,7 @@ label.o_form_label {
 
   // Priority stars — violet tint
   .o_priority .o_priority_star {
-    color: darken($pk-light, 10%);
+    color: $pk-light-dim;
 
     &.fa-star {
       color: $pk-deep;

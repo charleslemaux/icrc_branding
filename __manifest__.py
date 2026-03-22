@@ -18,10 +18,9 @@
                 "web/static/src/scss/primary_variables.scss",
                 "icrc_branding/static/src/scss/brand_variables.scss",
             ),
-            # Plain CSS for Google Fonts (avoids libsass parse error on @import url)
-            "icrc_branding/static/src/css/fonts.css",
-            # Runtime styles: typography, shapes, and component polish
-            "icrc_branding/static/src/scss/brand.scss",
+            # TEMPORARILY DISABLED for bisection testing:
+            # "icrc_branding/static/src/css/fonts.css",
+            # "icrc_branding/static/src/scss/brand.scss",
         ],
     },
     "installable": True,
