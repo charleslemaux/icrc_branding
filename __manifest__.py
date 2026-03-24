@@ -48,8 +48,11 @@ Replaces Odoo's default Enterprise purple (#714B67) with ICRC deep violet
                 "web_enterprise/static/src/scss/primary_variables.scss",
                 "icrc_branding/static/src/scss/brand_variables.scss",
             ),
-            # Runtime styles: typography, shapes, and component polish
+            # Global runtime styles: typography, shapes, and component polish
             "icrc_branding/static/src/scss/brand.scss",
+            # Recruitment-specific view overrides (moved from search_tools so
+            # that module stays purely data-focused with no styling concerns).
+            "icrc_branding/static/src/scss/recruitment.scss",
         ],
     },
     "installable": True,

@@ -1,0 +1,382 @@
+// ============================================================
+// Recruitment Views — Modern SaaS Design Overrides
+// Part of the ICRC Brand Theme (icrc_branding module).
+//
+// All Odoo recruitment view overrides live here so that
+// search_tools stays purely data-focused and this file can
+// be maintained alongside the rest of the brand theme.
+//
+// Scoped strictly to recruitment-specific view classes —
+// no global selector pollution.
+// ============================================================
+
+// Local design tokens (same values as brand.scss $pk-* palette,
+// prefixed $rct-* to avoid variable-reassignment side-effects
+// when compiled in the same SCSS bundle as brand.scss).
+$rct-primary:      #120427;
+$rct-light:        #f3eef8;
+$rct-mid:          #2d1154;
+$rct-bg:           #fafafa;
+$rct-card-bg:      #ffffff;
+$rct-border:       #e5e7eb;
+$rct-text:         #111827;
+$rct-text-muted:   #6b7280;
+$rct-radius:       10px;
+$rct-radius-sm:    6px;
+$rct-shadow-sm:    0 1px 2px rgba(0, 0, 0, 0.04);
+$rct-shadow:       0 1px 3px rgba(0, 0, 0, 0.06);
+$rct-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+$rct-transition:   0.15s ease;
+
+// ============================================================
+// General — Recruitment views background
+// ============================================================
+
+.o_action_manager {
+  .o_hr_recruitment_kanban,
+  .o_kanban_applicant,
+  .o_applicant_form {
+    .o_content {
+      background-color: $rct-bg !important;
+    }
+  }
+}
+
+// ============================================================
+// Job Positions Kanban — o_hr_recruitment_kanban
+// ============================================================
+
+.o_hr_recruitment_kanban {
+  .o_kanban_record {
+    background: $rct-card-bg;
+    border: 1px solid $rct-border;
+    border-radius: $rct-radius;
+    box-shadow: $rct-shadow-sm;
+    transition: box-shadow $rct-transition, transform $rct-transition;
+    overflow: hidden;
+
+    &:hover {
+      box-shadow: $rct-shadow-hover;
+      transform: translateY(-1px);
+    }
+
+    // Stat numbers in indigo
+    .oe_kanban_primary_right,
+    .o_kanban_primary_right {
+      strong, .o_kanban_primary_bottom strong {
+        color: $rct-primary;
+        font-weight: 600;
+      }
+    }
+
+    // Number badges / counts
+    .badge, .oe_kanban_text_red {
+      color: $rct-primary !important;
+    }
+
+    // Clean typography
+    .o_kanban_record_title, .oe_kanban_details h4 {
+      color: $rct-text;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    .o_kanban_record_body, .oe_kanban_details > div {
+      color: $rct-text-muted;
+      font-size: 0.8125rem;
+    }
+  }
+}
+
+// ============================================================
+// Applicants Kanban — o_kanban_applicant
+// ============================================================
+
+.o_kanban_applicant {
+  // Kanban columns
+  .o_kanban_group {
+    background: #f9fafb;
+    border-radius: $rct-radius;
+    padding: 6px;
+
+    // Column headers
+    .o_kanban_header {
+      .o_column_title {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: $rct-text;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .o_kanban_config .dropdown-toggle,
+      .o_kanban_quick_add {
+        color: $rct-text-muted;
+        &:hover { color: $rct-primary; }
+      }
+    }
+  }
+
+  // Cards
+  .o_kanban_record {
+    background: $rct-card-bg;
+    border: 1px solid $rct-border;
+    border-radius: $rct-radius;
+    box-shadow: $rct-shadow-sm;
+    margin-bottom: 6px;
+    transition: box-shadow $rct-transition;
+
+    &:hover {
+      box-shadow: $rct-shadow-hover;
+    }
+
+    .oe_kanban_details {
+      h4, .o_kanban_record_title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $rct-text;
+      }
+
+      .o_text_overflow, span, div {
+        font-size: 0.8125rem;
+        color: $rct-text-muted;
+      }
+    }
+
+    // Priority stars — indigo tint
+    .o_priority .o_priority_star {
+      color: mix(black, $rct-light, 10%);
+      &.fa-star {
+        color: $rct-primary;
+      }
+    }
+
+    // Ribbons — cleaner
+    .o_kanban_record_ribbon {
+      .badge {
+        border-radius: $rct-radius-sm;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+    }
+
+    // Footer — clean alignment
+    .oe_kanban_bottom_left, .oe_kanban_bottom_right {
+      font-size: 0.75rem;
+      color: $rct-text-muted;
+    }
+
+    // Activity icons
+    .o_activity_color_default { color: $rct-text-muted; }
+    .o_activity_color_today { color: $rct-primary; }
+  }
+
+  // Quick create
+  .o_kanban_quick_create {
+    background: $rct-card-bg;
+    border: 1px solid $rct-border;
+    border-radius: $rct-radius;
+    box-shadow: $rct-shadow;
+    padding: 12px;
+  }
+}
+
+// ============================================================
+// Applicants List View — scoped to recruitment only
+// ============================================================
+
+.o_list_view {
+  // Only applies when the list is inside a recruitment action
+  .o_hr_recruitment & {
+
+    thead th {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: $rct-text-muted;
+      border-bottom: 2px solid $rct-border;
+      background: transparent;
+    }
+
+    tbody tr {
+      transition: background $rct-transition;
+
+      &:hover {
+        background-color: $rct-light !important;
+      }
+
+      td {
+        font-size: 0.8125rem;
+        color: $rct-text;
+        border-color: mix(white, $rct-border, 3%);
+        vertical-align: middle;
+      }
+    }
+
+    // Stage badges
+    .badge, .o_field_badge .badge {
+      border-radius: 999px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 0.25em 0.75em;
+    }
+  }
+}
+
+// ============================================================
+// Talent Pool Kanban
+// ============================================================
+
+.o_hr_talent_pool_kanban,
+.o_kanban_view[class*="talent"] {
+  .o_kanban_record {
+    background: $rct-card-bg;
+    border: 1px solid $rct-border;
+    border-radius: $rct-radius;
+    box-shadow: $rct-shadow-sm;
+    transition: box-shadow $rct-transition, transform $rct-transition;
+
+    &:hover {
+      box-shadow: $rct-shadow-hover;
+      transform: translateY(-1px);
+    }
+
+    .oe_kanban_details, .o_kanban_record_body {
+      font-size: 0.8125rem;
+      color: $rct-text-muted;
+
+      h4, strong, .o_kanban_record_title {
+        color: $rct-text;
+        font-weight: 600;
+      }
+    }
+
+    .oe_kanban_bottom_left, .oe_kanban_bottom_right {
+      font-size: 0.75rem;
+      color: $rct-text-muted;
+    }
+  }
+}
+
+// ============================================================
+// Applicant Form — o_applicant_form
+// ============================================================
+
+.o_applicant_form {
+  // Form sheet
+  .o_form_sheet_bg {
+    background: $rct-bg !important;
+  }
+
+  .o_form_sheet {
+    background: $rct-card-bg;
+    border: 1px solid $rct-border;
+    border-radius: $rct-radius;
+    box-shadow: $rct-shadow;
+  }
+
+  // Stat buttons
+  .oe_button_box .oe_stat_button {
+    border-color: $rct-border;
+    border-radius: $rct-radius-sm;
+    transition: background $rct-transition;
+
+    &:hover {
+      background: $rct-light;
+    }
+
+    .o_stat_value, .o_stat_text {
+      color: $rct-text;
+    }
+    .o_stat_value {
+      font-weight: 700;
+      color: $rct-primary;
+    }
+  }
+
+  // Field labels
+  .o_form_label, label.o_form_label {
+    color: $rct-text-muted;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  // Notebook tabs — indigo active
+  .o_notebook {
+    .nav-tabs {
+      border-bottom-color: $rct-border;
+
+      .nav-link {
+        color: $rct-text-muted;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        border-radius: $rct-radius-sm $rct-radius-sm 0 0;
+        transition: color $rct-transition;
+
+        &:hover {
+          color: $rct-primary;
+          border-color: transparent transparent $rct-border;
+        }
+
+        &.active {
+          color: $rct-primary;
+          border-color: $rct-border $rct-border $rct-card-bg;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  // Employability scoring section
+  .o_group[string="Score d'employabilité"],
+  .o_inner_group {
+    // Radio widget buttons for score fields
+    .o_radio_input {
+      .btn-check:checked + .btn {
+        background: $rct-primary;
+        border-color: $rct-primary;
+        color: #fff;
+      }
+      .btn {
+        border-color: $rct-border;
+        color: $rct-text-muted;
+        border-radius: $rct-radius-sm;
+        transition: all $rct-transition;
+        &:hover {
+          border-color: $rct-primary;
+          color: $rct-primary;
+        }
+      }
+    }
+  }
+
+  // Progress bar — indigo accent
+  .o_progressbar .progress {
+    border-radius: 999px;
+    height: 8px;
+    background: mix(white, $rct-border, 4%);
+
+    .progress-bar {
+      background: $rct-primary !important;
+      border-radius: 999px;
+    }
+  }
+
+  .o_progressbar .o_progressbar_value {
+    color: $rct-primary;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  // Chatter
+  .o_FormRenderer_chatterContainer {
+    background: mix(black, $rct-bg, 1%);
+
+    .o_chatter_topbar {
+      border-bottom-color: $rct-border;
+    }
+  }
+}
