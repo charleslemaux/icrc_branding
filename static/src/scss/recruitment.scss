@@ -340,6 +340,16 @@ $rct-transition:   0.15s ease;
         }
       }
     }
+
+    // Skills tab pane — the .o_list_renderer inside the skills
+    // widget has a -16px negative margin-top (from Odoo) which
+    // pushes it above its .o_list_view parent.  That parent has
+    // overflow:hidden, so the top 16px of the "Compétences &
+    // certifications" header is clipped.  Fix: remove the
+    // negative margin on the renderer in this specific context.
+    .tab-content .o_applicant_skills > .o_list_renderer {
+      margin-top: 0 !important;
+    }
   }
 
   // Employability scoring section

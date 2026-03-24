@@ -1,6 +1,6 @@
 {
     "name": "ICRC Brand Theme",
-    "version": "1.1.0",
+    "version": "19.0.2.4.1",
     "summary": "Deep violet brand override for Odoo 19 Enterprise backend",
     "description": """
 ICRC Brand Theme — Odoo 19 Enterprise
