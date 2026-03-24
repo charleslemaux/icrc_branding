@@ -400,6 +400,26 @@ label.o_form_label {
 
 .o_searchview_facet {
   border-radius: $pk-rad-sm;
+  // Clip any child hover background to our rounded corners.
+  // Without this, button/icon wrappers inside the facet paint a square
+  // highlight that breaks the pill shape.
+  overflow: hidden;
+
+  // The remove / edit icon: only its colour should react on hover —
+  // no background, no border-radius change on the icon element itself.
+  .o_facet_remove,
+  [class*="o_delete"],
+  button {
+    background: transparent !important;
+    border-radius: 0 !important;   // parent's overflow:hidden already clips
+    transition: color $pk-transition, opacity $pk-transition;
+
+    &:hover {
+      background: transparent !important;
+      color: $pk-deep;
+      opacity: 1;
+    }
+  }
 }
 
 // Search panel section headers
