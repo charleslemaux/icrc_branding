@@ -323,8 +323,20 @@ $rct-transition:   0.15s ease;
 
         &.active {
           color: $rct-primary;
-          border-color: $rct-border $rct-border $rct-card-bg;
+          // Normalize Odoo's thicker/primary-coloured top indicator to a plain 1 px border
+          border-top: 1px solid $rct-border !important;
+          border-left: 1px solid $rct-border;
+          border-right: 1px solid $rct-border;
+          // White bottom border erases the nav-tabs separator under this tab only
+          border-bottom: 1px solid $rct-card-bg;
+          border-radius: $rct-radius-sm $rct-radius-sm 0 0;
           font-weight: 600;
+
+          // Suppress any pseudo-element indicator Odoo may inject
+          &::before,
+          &::after {
+            display: none !important;
+          }
         }
       }
     }

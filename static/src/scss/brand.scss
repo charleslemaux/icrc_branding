@@ -142,8 +142,20 @@ label.o_form_label {
 
       &.active {
         color: $pk-deep;
-        border-color: $pk-border $pk-border $pk-card-bg;
+        // Normalize Odoo's thicker/primary-coloured top indicator to a plain 1 px border
+        border-top: 1px solid $pk-border !important;
+        border-left: 1px solid $pk-border;
+        border-right: 1px solid $pk-border;
+        // White bottom border erases the nav-tabs separator under this tab only
+        border-bottom: 1px solid $pk-card-bg;
+        border-radius: $pk-rad-sm $pk-rad-sm 0 0;
         font-weight: 600;
+
+        // Suppress any pseudo-element indicator Odoo may inject
+        &::before,
+        &::after {
+          display: none !important;
+        }
       }
     }
   }
