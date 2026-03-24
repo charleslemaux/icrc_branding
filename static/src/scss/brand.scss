@@ -544,3 +544,12 @@ label.o_form_label {
   background-color: $pk-deep;
   color: #fff;
 }
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  21. KANBAN GHOST CARDS — hide Odoo's invisible flex-row spacers
+// ═══════════════════════════════════════════════════════════════════════════
+
+.o_kanban_ghost {
+  visibility: hidden;
+}
